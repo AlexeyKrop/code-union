@@ -1,58 +1,45 @@
 .wrapper {
-    width: 100%;
-    max-width: 414px;
-    min-height: 380px;
+    box-sizing: border-box;
     position: absolute;
-    top: 25%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    padding: 26px 54px;
+    width: 100%;
+    max-width: 526px;
+    min-height: 650px;
+    background: #F9FAFB;
+    box-shadow: -30px 30px 50px rgba(28, 28, 30, 0.1);
+    border-radius: 25px;
+    text-align: right;
+
+}
+
+.title {
+    margin-top: 0;
+    font-size: 34px;
+    line-height: 44px;
     text-align: center;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    color: #424F5E;
 }
 
-.content {
-    padding: 30px;
-}
-.input{
-    position: relative;
-    margin-bottom: 25px;
-}
 
-.error {
-    position: absolute;
-    left: 0;
-    top: 31px;
-    margin-bottom: 0;
+.checkBoxWrapper {
 
-    color: red;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 110px;
+    margin-bottom: 36px;
     text-align: left;
 }
 
-.text{
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-
-    color: #000000;
-
-    opacity: 0.5;
+.btn {
+    padding: 16px !important;
+    border-radius: 15px !important;
 }
-.helperTextForgot{
-    text-align: right;
-}
-.checkbox{
-    display: flex;
-    align-items: center;
-}
-.checkbox input{
-    cursor: pointer;
-
-    margin-right: 8px;
-}
-.checkbox span{
-    font-size: 14px;
-    line-height: 17px;
-
-    color: #000000;
+.linkText{
+    font-size: 16px;
+    line-height: 120%;
+    color: #424F5E;
 }

@@ -34,7 +34,4 @@
 .btn:active{
     opacity: 0.3;
 }
-.btn:focus{
-    background: #3782DA;
-    color: #FFF;
-}
+

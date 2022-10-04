@@ -14,9 +14,9 @@ export const App: React.FC = () => {
       <nav className="Search">
         <div className="container">
           <Search />
+          <SignUp />
         </div>
       </nav>
-      <SignUp />
     </div>
   );
 };

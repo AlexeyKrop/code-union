@@ -1,12 +1,17 @@
 import React from 'react';
 
+import { setOpenRegisterModalAC } from '../../bll/reducers/modalReducer';
+import { useAppDispatch } from '../../bll/state/hooks/useAppDispatch/useAppDispatch';
 import { Button } from '../Button/Button';
 
 import s from './Header.module.css';
 
 export const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
   const onClickHandleEnter: () => void = () => {};
-  const onClickHandleRegistration: () => void = () => {};
+  const onClickHandleRegistration: () => void = () => {
+    dispatch(setOpenRegisterModalAC(true));
+  };
 
   return (
     <nav className={s.wrapper}>

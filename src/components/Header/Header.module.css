@@ -1,0 +1,40 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title{
+    color: #9494A0;
+    text-decoration: none;
+}
+.btnGroup {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 8px 24px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 18px;
+    line-height: 120%;
+    color: #9494A0;
+}
+.btn:hover{
+    transition: all 0.5s ease-out;
+    color: #FFF;
+    background: #3782DA;
+}
+.btn:active{
+    opacity: 0.3;
+}
+.btn:focus{
+    background: #3782DA;
+    color: #FFF;
+}

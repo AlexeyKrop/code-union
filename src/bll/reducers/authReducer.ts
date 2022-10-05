@@ -1,21 +1,27 @@
 import { Dispatch } from 'redux';
 
 import { loginAPI, LoginParamsType } from '../../api/login/login';
+import { ProfileAPI } from '../../api/profile/profile';
 import { AuthParamsType, registrationAPI } from '../../api/registration/registration';
 import { saveState } from '../../utils/SessionStorage';
 
+import { setAppInitialAC, setAppLoadAC } from './appReducer';
 import { setOpenLoginModalAC, setOpenRegisterModalAC } from './modalReducer';
 
 const initialState = {
   isRegister: false,
   isLogin: false,
+  user: {} as UserType,
 };
 
 export type InitialStateType = typeof initialState;
-
+export type UserType = {
+  id: number;
+  email: string;
+  nickname: string;
+};
 // REDUCER
 export const authReducer = (
-  // saveState('cardsId', id);
   // eslint-disable-next-line default-param-last
   state: InitialStateType = initialState,
   action: AuthAT,
@@ -30,6 +36,11 @@ export const authReducer = (
       return {
         ...state,
         isLogin: action.isLogin,
+      };
+    case 'AUTH/SET-USER':
+      return {
+        ...state,
+        user: action.user,
       };
     default:
       return state;
@@ -48,6 +59,19 @@ export const registerUserTC = (authParams: AuthParamsType) => (dispatch: Dispatc
     })
     .catch(err => console.log(err));
 };
+
+export const profileTC = () => (dispatch: Dispatch) => {
+  dispatch(setAppLoadAC(true));
+  ProfileAPI.setProfile()
+    .then(res => {
+      dispatch(setIsLoginInAC(true));
+      dispatch(setAppInitialAC(true));
+      dispatch(setUserAC(res.data));
+    })
+    .catch(err => console.log(err))
+    .finally(() => dispatch(setAppLoadAC(false)));
+};
+
 export const loginTC = (loginParams: LoginParamsType) => (dispatch: Dispatch) => {
   loginAPI
     .login(loginParams)
@@ -64,8 +88,10 @@ export const setIsRegisterInAC = (isRegister: boolean) =>
   ({ type: 'AUTH/SET-IS-REGISTER-IN', isRegister } as const);
 export const setIsLoginInAC = (isLogin: boolean) =>
   ({ type: 'AUTH/SET-IS-LOGIN-IN', isLogin } as const);
+export const setUserAC = (user: UserType) => ({ type: 'AUTH/SET-USER', user } as const);
 
 // TYPE
 export type SetRegisterAT = ReturnType<typeof setIsRegisterInAC>;
 export type SetLoginAT = ReturnType<typeof setIsLoginInAC>;
-export type AuthAT = SetRegisterAT | SetLoginAT;
+export type SetUserAT = ReturnType<typeof setUserAC>;
+export type AuthAT = SetRegisterAT | SetLoginAT | SetUserAT;

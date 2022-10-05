@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import './App.css';
 import { Header } from './components/Header/Header';
@@ -7,7 +7,10 @@ import { Login } from './modals/Login/Login';
 import { SignUp } from './modals/SignUp/SignUp';
 
 export const App: React.FC = () => {
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   dispatch(profileTC());
+  //   // dispatch(setRestaurantsTC());
+  // }, [dispatch]);
 
   return (
     <div className="App">

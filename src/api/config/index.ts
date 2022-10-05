@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-let token;
+import { restoreState } from '../../utils/SessionStorage';
+
+const getTokenFromSessionStorage: () => string = () => {
+  return restoreState<string>('accessToken', '');
+};
+const token = getTokenFromSessionStorage();
 
 export const instance = axios.create({
   baseURL:
@@ -13,5 +18,3 @@ export const instance = axios.create({
     'Access-Control-Allow-Credentials': true,
   },
 });
-//
-// instance.defaults.headers.common['acces-token'] = '';

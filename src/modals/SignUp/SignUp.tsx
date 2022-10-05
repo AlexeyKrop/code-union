@@ -20,6 +20,8 @@ import s from './SignUp.module.css';
 type FormValues = {
   email?: string;
   password?: string;
+  nickname?: string;
+  phone?: string;
   confirmPassword?: string;
   conditionTitle: boolean;
 };
@@ -31,6 +33,8 @@ export const SignUp: React.FC = () => {
     initialValues: {
       email: '',
       password: '',
+      nickname: '',
+      phone: '',
       confirmPassword: '',
       conditionTitle: true,
     },
@@ -57,9 +61,14 @@ export const SignUp: React.FC = () => {
       return errors;
     },
     onSubmit: values => {
-      const { email, password } = { ...values };
+      const authParams = {
+        email: values.email,
+        password: values.password,
+        nickname: 'mike Brown',
+        phone: '88888888888',
+      };
 
-      dispatch(registerUserTC({ email, password }));
+      dispatch(registerUserTC(authParams));
     },
   });
 

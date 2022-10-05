@@ -1,11 +1,17 @@
 import { Dispatch } from 'redux';
 
+import { loginAPI, LoginParamsType } from '../../api/login/login';
 import { AuthParamsType, registrationAPI } from '../../api/registration/registration';
 import { saveState } from '../../utils/SessionStorage';
 
+import { setOpenLoginModalAC, setOpenRegisterModalAC } from './modalReducer';
+
 const initialState = {
   isRegister: false,
+  isLogin: false,
 };
+
+export type InitialStateType = typeof initialState;
 
 // REDUCER
 export const authReducer = (
@@ -20,24 +26,46 @@ export const authReducer = (
         ...state,
         isRegister: action.isRegister,
       };
+    case 'AUTH/SET-IS-LOGIN-IN':
+      return {
+        ...state,
+        isLogin: action.isLogin,
+      };
     default:
       return state;
   }
 };
 // THUNK
 export const registerUserTC = (authParams: AuthParamsType) => (dispatch: Dispatch) => {
-  registrationAPI.setUser(authParams).then(res => {
-    dispatch(setIsLoggedInAC(true));
-    saveState('refreshToken', res.data.tokens.refreshToken);
-    saveState('accessToken', res.data.tokens.accessToken);
-  });
+  registrationAPI
+    .setUser(authParams)
+    .then(res => {
+      dispatch(setIsRegisterInAC(true));
+      saveState('refreshToken', res.data.tokens.refreshToken);
+      saveState('accessToken', res.data.tokens.accessToken);
+      dispatch(setOpenRegisterModalAC(false));
+      dispatch(setOpenLoginModalAC(false));
+    })
+    .catch(err => console.log(err));
 };
+export const loginTC = (loginParams: LoginParamsType) => (dispatch: Dispatch) => {
+  loginAPI
+    .login(loginParams)
+    .then(res => {
+      saveState('refreshToken', res.data.tokens.refreshToken);
+      saveState('accessToken', res.data.tokens.accessToken);
+      dispatch(setOpenLoginModalAC(false));
+    })
+    .catch(err => console.log(err));
+};
+
 // ACTION CREATOR
-export const setIsLoggedInAC = (isRegister: boolean) =>
+export const setIsRegisterInAC = (isRegister: boolean) =>
   ({ type: 'AUTH/SET-IS-REGISTER-IN', isRegister } as const);
+export const setIsLoginInAC = (isLogin: boolean) =>
+  ({ type: 'AUTH/SET-IS-LOGIN-IN', isLogin } as const);
+
 // TYPE
-export type InitialStateType = {
-  isRegister: boolean;
-};
-export type SetAuthAT = ReturnType<typeof setIsLoggedInAC>;
-export type AuthAT = SetAuthAT;
+export type SetRegisterAT = ReturnType<typeof setIsRegisterInAC>;
+export type SetLoginAT = ReturnType<typeof setIsLoginInAC>;
+export type AuthAT = SetRegisterAT | SetLoginAT;

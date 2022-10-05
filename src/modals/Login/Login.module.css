@@ -1,0 +1,32 @@
+.wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 26px 54px;
+    width: 100%;
+    max-width: 526px;
+    min-height: 420px;
+    background: #F9FAFB;
+    box-shadow: -30px 30px 50px rgba(28, 28, 30, 0.1);
+    border-radius: 25px;
+    text-align: right;
+}
+.title {
+    margin-top: 0;
+    font-size: 34px;
+    line-height: 44px;
+    text-align: center;
+    color: #424F5E;
+}
+.btn {
+    padding: 16px !important;
+    border-radius: 15px !important;
+}
+.register, .forgotPassword{
+    cursor: pointer;
+    text-align: center;
+    color: #C1C1CB;
+    font-size: 16px;
+}

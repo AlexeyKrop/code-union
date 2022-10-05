@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { setOpenRegisterModalAC } from '../../bll/reducers/modalReducer';
+import {
+  setOpenLoginModalAC,
+  setOpenRegisterModalAC,
+} from '../../bll/reducers/modalReducer';
 import { useAppDispatch } from '../../bll/state/hooks/useAppDispatch/useAppDispatch';
 import { Button } from '../Button/Button';
 
@@ -8,7 +11,9 @@ import s from './Header.module.css';
 
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
-  const onClickHandleEnter: () => void = () => {};
+  const onClickHandleLogin: () => void = () => {
+    dispatch(setOpenLoginModalAC(true));
+  };
   const onClickHandleRegistration: () => void = () => {
     dispatch(setOpenRegisterModalAC(true));
   };
@@ -29,7 +34,7 @@ export const Header: React.FC = () => {
         <Button
           className={`${s.btn} ${s.enterBtn}`}
           name="Войти"
-          callBack={onClickHandleEnter}
+          callBack={onClickHandleLogin}
         />
       </div>
     </nav>

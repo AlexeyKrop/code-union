@@ -10,8 +10,10 @@ export const modalReducer = (
   action: ModalReducerType,
 ): InitialStateType => {
   switch (action.type) {
-    case 'MODAL/SET-OPEN-REGISTER-MODAL':
+    case 'MODAL/SET-OPEN-REGISTER':
       return { ...state, openRegisterModal: action.open };
+    case 'MODAL/SET-OPEN-LOGIN':
+      return { ...state, openLoginModal: action.open };
     default:
       return state;
   }
@@ -19,9 +21,9 @@ export const modalReducer = (
 
 // ACTIONS CREATOR
 export const setOpenRegisterModalAC = (open: boolean) =>
-  ({ type: 'MODAL/SET-OPEN-REGISTER-MODAL', open } as const);
+  ({ type: 'MODAL/SET-OPEN-REGISTER', open } as const);
 export const setOpenLoginModalAC = (open: boolean) =>
-  ({ type: 'MODAL/SET-OPEN-LOGIN-MODAL', open } as const);
+  ({ type: 'MODAL/SET-OPEN-LOGIN', open } as const);
 
 // TYPES
 type SetOpenRegisterModalAT = ReturnType<typeof setOpenRegisterModalAC>;

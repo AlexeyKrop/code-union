@@ -6,10 +6,12 @@ import {
 } from 'redux';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
+import { authReducer } from '../reducers/authReducer';
 import { modalReducer } from '../reducers/modalReducer';
 
 const rootReducers = combineReducers({
   modal: modalReducer,
+  auth: authReducer,
 });
 
 export const store = createStore(rootReducers, applyMiddleware(thunk));

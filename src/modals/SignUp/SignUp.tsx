@@ -9,6 +9,7 @@ import FormGroup from '@mui/material/FormGroup/FormGroup';
 import TextField from '@mui/material/TextField/TextField';
 import { FormikErrors, useFormik } from 'formik';
 
+import { registerUserTC } from '../../bll/reducers/authReducer';
 import { setOpenRegisterModalAC } from '../../bll/reducers/modalReducer';
 import { useAppDispatch } from '../../bll/state/hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../bll/state/hooks/useAppSelector/useAppSelector';
@@ -56,7 +57,9 @@ export const SignUp: React.FC = () => {
       return errors;
     },
     onSubmit: values => {
-      console.log(values);
+      const { email, password } = { ...values };
+
+      dispatch(registerUserTC({ email, password }));
     },
   });
 
